@@ -97,6 +97,17 @@ togglbutton.render(
       return description
     }
 
+    function getTags () {
+      var tags = [];
+      var labelElements = elem.querySelectorAll('a[href^="/issues/?jql=labels"]');
+      labelElements.forEach(function(labelElement){
+        tags.push(labelElement.href.match(/22(.*)%22/)[1]);
+      });
+      console.log(tags)
+      return tags;
+    }
+
+
     function getProject () {
       var project = '';
 
@@ -116,7 +127,8 @@ togglbutton.render(
     link = togglbutton.createTimerLink({
       className: 'jira2018',
       description: getDescription,
-      projectName: getProject
+      projectName: getProject,
+      tags: getTags
     });
 
     container.appendChild(link);
